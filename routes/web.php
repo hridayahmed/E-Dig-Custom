@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,20 +29,25 @@ Route::get('/login',function (){
     {
         return view('login');
     }
-
-
 });
 
-Route::get('/supplier',function (){
-    if (Auth::check()) {
-        return view('layout/supplier/add_supplier');
-    }
 
+//for dynamic connection
+
+Route::middleware(['web'])->group(function () {
+    Route::post('/supplier',[SupplierController::class,'store']);
+
+    Route::get('/supplier',function (){
+
+                return view('layout/supplier/add_supplier');
+
+
+
+    });
+
+
+
+    Route::get('/supplier_list',[SupplierController::class,'index']);
 });
 
-Route::get('/supplier_list',function (){
-    if (Auth::check()) {
-        return view('layout/supplier/supplier_list');
-    }
 
-});

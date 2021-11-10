@@ -1,5 +1,8 @@
 @extends('layout.master')
 
+@yield('style')
+
+
 @section('sidebar')
 
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -379,9 +382,8 @@
     <script src="js/sb-admin-2.js"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.js"></script>
+    @yield('script_dashboard')
 
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
 @endsection
+
+
