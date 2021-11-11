@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -44,10 +45,10 @@ Route::middleware(['web'])->group(function () {
 
 
     });
-
-
-
     Route::get('/supplier_list',[SupplierController::class,'index']);
+
+
+    Route::post('purchase',[PurchaseController::class,'store']);
 });
 
 
