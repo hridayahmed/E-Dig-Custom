@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('phone_number');
             $table->string('trade_name');
-            $table->string('owner_name');
+            $table->string('name');
             $table->string('trade_license_number');
             $table->string('drug_license_number');
             $table->string('email')->unique();

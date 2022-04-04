@@ -20,11 +20,7 @@ class LoginCheckMiddleware
 
 // Get the currently authenticated user's ID...
 
-
             return $next($request);
-
-
-
 
     }
 }

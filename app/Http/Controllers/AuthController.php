@@ -29,9 +29,7 @@ class AuthController extends Controller
             return view('layout.supplier.add_supplier');
         }
 
-        return 'Failure';
-
-
+         return view('login');
 
 
     }

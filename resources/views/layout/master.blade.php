@@ -81,7 +81,6 @@
 {{--        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>--}}
     <div class="script">
         @yield('script')
-
     </div>
 
     </body>

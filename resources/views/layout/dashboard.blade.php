@@ -2,11 +2,9 @@
 
 @yield('style')
 
-
 @section('sidebar')
 
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
             <div class="sidebar-brand-icon rotate-n-15">
@@ -54,16 +52,13 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                aria-expanded="true" aria-controls="collapseUtilities">
                 <i class="fas fa-fw fa-wrench"></i>
-                <span>Utilities</span>
+                <span>Purchase</span>
             </a>
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Custom Utilities:</h6>
-                    <a class="collapse-item" href="utilities-color.html">Colors</a>
-                    <a class="collapse-item" href="utilities-border.html">Borders</a>
-                    <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                    <a class="collapse-item" href="utilities-other.html">Other</a>
+                    <h6 class="collapse-header">Purchase Info:</h6>
+                    <a class="collapse-item" href="add_purchase">New Purchase</a>
                 </div>
             </div>
         </li>
@@ -346,7 +341,6 @@
            @yield('dashboard_main_content')
         </div>
         <!--end Page Content -->
-
     </div>
     <!-- End of Main Content -->
 
@@ -363,24 +357,17 @@
 
                 if($(this).attr('href') == url)
                 {
-
                     $(this).addClass('nav_hover_color')
                     $(this).closest('li').addClass('active');
                 $(this).closest('.collapse').addClass('show');
                 }
-
             });
         });
-
     </script>
-
-
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.js"></script>
-
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.js"></script>
-
     <!-- Page level plugins -->
     @yield('script_dashboard')
 

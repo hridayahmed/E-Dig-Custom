@@ -19,23 +19,24 @@ class SetDBMiddleWare
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
-{
+    {
+
+
+
    // $dbName="test";
     if (Auth::check())
     {
         $dbName="ediagnosis".Auth::id();
-        //dd(Auth::id());
-        //  DB::disconnect('mysql');//here connection name, I used mysql for example
         Config::set('database.connections.mysql2.database', $dbName);//new database name, you want to connect to.
         return $next($request);
 
     }
-    else
-    {
-        return view('login');
+        else
+        {
+            abort(404);
+        }
+
+
     }
-
-
-}
 
 }

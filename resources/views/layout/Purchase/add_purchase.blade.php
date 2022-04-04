@@ -1,10 +1,15 @@
 @extends('layout/dashboard')
 
+@section('style')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+@endsection
+
 @section('dashboard_main_content')
     <!-- /.start of container-fluid is on dashboard not here -->
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Add Purchase</h1>
+    <h1 class="h3 mb-4 text-gray-800">New Purchase</h1>
 
     <div class="row">
 
@@ -13,70 +18,64 @@
             <!-- Circle Buttons -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Add Purchase Details</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">New Purchase Details</h6>
                 </div>
                 <div class="card-body">
-                    <p >Please add all information about purchase.</p>
-
+                    <p >Please add  information about new purchase.</p>
 
                 <!-- Circle Buttons (Default) -->
-                    <form action="{{'purchase'}}" method="post">
+                    <form action="{{'new_purchase'}}" method="post">
                         @csrf
                         <div class="mb-3">
-                            <label for="item_id" class="form-label">Item Name</label>
-                            <input type="text" required class="form-control" name="item_id" id="item_id" placeholder="">
-                        </div>
-                        <div class="mb-3">
-                            <label for="item_category" class="form-label">Item Category</label>
-                            <input type="text" required class="form-control" name="item_category" id="item_category" placeholder="">
-                        </div>
-                        <div class="mb-3">
-                            <label for="quantity" class="form-label">Quantity</label>
-                            <input type="text" required  class="form-control" name="quantity" id="quantity" placeholder="">
-                        </div>
-                        <div class="mb-3">
-                            <label for="per_unit_price" class="form-label">per_unit_price</label>
-                            <input type="text" required class="form-control" name="per_unit_price" id="per_unit_price" placeholder="">
-                        </div>
-                        <div class="mb-3">
-                            <label for="supplier_id" class="form-label">Supplier Name</label>
-                            <input type="text" required class="form-control" name="supplier_id" id="supplier_id" placeholder="">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="status" class="form-label">Status</label>
-                            <input type="text" required class="form-control" name="status" id="status" placeholder="">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="transection_type" class="form-label">Transection Type</label>
+                            <label for="item_id" class="form-label">Transactions Type</label>
                             <input type="text" required class="form-control" name="transection_type" id="transection_type" placeholder="">
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="item_category" class="form-label">Purchase Order Date</label>
+                            <input type="date" required class="form-control" name="purchase_order_date" id="purchase_order_date" placeholder="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="item_category" class="form-label">Supplier Name</label>
+
+                            <select class="supplierName form-control" name="supplier_id" id="supplier_id">
+                                <option value="select"> Select Supplier Name</option>
+
+                            @foreach($supplier as $sup)
+                                <option value="{{$sup->supplier_id}}"> {{$sup->supplier_name}}</option>
+                                @endforeach
+
+                            </select>
                         </div>
 
                         <div class="mb-3">
-                            <label for="purchase_order_date" class="form-label">Purchase Order Date</label>
-                            <input type="text" required class="form-control" name="purchase_order_date" id="purchase_order_date" placeholder="">
-                        </div>
-
-                        <div class="mb-3">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Generate PO</button>
                         </div>
 
                     </form>
 
                 </div>
             </div>
-
-
-
         </div>
-
-
-
     </div>
-
 
     <!-- /.container-fluid is on dashboard not here -->
 
+@endsection
+
+
+@section('script')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.supplierName').select2();
+        });
+
+
+    </script>
+
+
 
 @endsection
+

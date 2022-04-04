@@ -17,11 +17,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('login');
+
+//for dynamic connection
+
+Route::middleware(['protect'])->group(function () {
+    //Supplier route
+    Route::post('/supplier',[SupplierController::class,'store']);
+    Route::get('/supplier',function (){
+                return view('layout/supplier/add_supplier');
+    });
+    Route::get('/supplier_list',[SupplierController::class,'index']);
+    Route::post('new_purchase',[PurchaseController::class,'store']);
+    //Purchase Route
+    Route::get('/add_purchase',[PurchaseController::class,'index']);
+    Route::post('/add_purchase',[PurchaseController::class,'store']);
+    Route::get('/supplier_name',[PurchaseController::class,'supplier_name']);
+    Route::get('/add_item',[PurchaseController::class,'add_item']);
+
+
 });
 
-Route::post('/login',[AuthController::class,'login']);
+
+Route::get('/', function () {
+    return view('login');
+})->middleware('throttle:5,1');
+
+Route::post('/login',[AuthController::class,'login'])->middleware('throttle:5,10');
 Route::get('/login',function (){
     if (Auth::check()) {
         return view('layout/supplier/add_supplier');
@@ -30,25 +51,5 @@ Route::get('/login',function (){
     {
         return view('login');
     }
-});
-
-
-//for dynamic connection
-
-Route::middleware(['web'])->group(function () {
-    Route::post('/supplier',[SupplierController::class,'store']);
-
-    Route::get('/supplier',function (){
-
-                return view('layout/supplier/add_supplier');
-
-
-
-    });
-    Route::get('/supplier_list',[SupplierController::class,'index']);
-
-
-    Route::post('purchase',[PurchaseController::class,'store']);
-});
-
+})->middleware('throttle:5,1');
 
