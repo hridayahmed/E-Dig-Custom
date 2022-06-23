@@ -5,40 +5,41 @@
 @endsection
 
 @section('dashboard_main_content')
-    <div class="col-sm-12 col-auto">
-        <h3 class="page-title">Purchase</h3>
-        <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-            <li class="breadcrumb-item active">Purchase</li>
-        </ul>
-    </div>
-    <div class="row">
-        <div class="col-sm-12 col">
-            <a href="" class="btn btn-primary float-right mt-2">Add New</a>
+    <div id="full_content">
+        <div class="col-sm-12 col-auto">
+            <h3 class="page-title">Purchase</h3>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="">Dashboard</a></li>
+                <li class="breadcrumb-item active">Purchase</li>
+            </ul>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-sm-12 col">
+                <a href="" class="btn btn-primary float-right mt-2">Add New</a>
+            </div>
+        </div>
 
-    <div class="row">
-        <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
 
-            <!-- Recent Orders -->
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="purchase-table" class="datatable table table-hover table-center mb-0">
-                            <thead>
-                            <tr>
-                                <th>Sl</th>
-                                <th>PO Date</th>
-                                <th>PO No</th>
-                                <th>Supplier</th>
-                                <th>Status</th>
-                                <th class="action-btn">Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+                <!-- Recent Orders -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="purchase-table" class="datatable table table-hover table-center mb-0">
+                                <thead>
+                                <tr>
+                                    <th>Sl</th>
+                                    <th>PO Date</th>
+                                    <th>PO No</th>
+                                    <th>Supplier</th>
+                                    <th>Status</th>
+                                    <th class="action-btn">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
                                 <?php
-                                    $counter = 1;
+                                $counter = 1;
                                 ?>
                                 @foreach ($purchase_order_data as $data)
                                     <tr>
@@ -56,9 +57,9 @@
                                                     <button type="button" class="btn btn-primary btn-sm" id="receive_po{{$counter}}" name="receive_po{{$counter}}" value="{{$data->purchase_order_id}}" onclick="po_wise_receive({{$data->purchase_order_id}})">Receive</button>
                                                     @if(!($data->receiving_purchase_order_id))
                                                         <button type="button" class="btn btn-primary btn-sm" id="delete_po{{$counter}}" name="delete_po{{$counter}}" value="{{$data->purchase_order_id}}" onclick="delete_po({{$data->purchase_order_id}})">Delete</button>
-                                                        @endif
+                                                    @endif
                                                     @if($data->receiving_purchase_order_id)
-                                                        <button type="button" class="btn btn-primary btn-sm" id="receive_view{{$counter}}" name="receive_view{{$counter}}" value="{{$data->purchase_order_id}}" onclick="receive_view({{$data->purchase_order_id}})">Receive View</button>
+                                                        <button type="button" class="btn btn-primary btn-sm" id="receive_view{{$counter}}" name="receive_view{{$counter}}" value="{{$data->purchase_order_id}}" onclick="receive_view({{$data->purchase_order_id}})">Payment</button>
                                                     @endif
                                                 </div>
 
@@ -67,20 +68,21 @@
                                         </td>
                                     </tr>
                                     <?php
-                                        ++$counter;
+                                    ++$counter;
                                     ?>
                                 @endforeach
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
+                <!-- /Recent Orders -->
+
+                <div id="po_wise_details">
+
+                </div>
+
             </div>
-            <!-- /Recent Orders -->
-
-            <div id="po_wise_details">
-
-            </div>
-
         </div>
     </div>
 @endsection
@@ -180,7 +182,8 @@
                 data: {_token: _token, purchase_order_id:purchase_order_id},
                 success: function(data)
                 {
-                    alert(data);
+                    //alert(data);
+                    document.getElementById("full_content").innerHTML = data;
                 }
             });
         }
@@ -239,6 +242,47 @@
 
             document.getElementById("add_new_line"+counter).innerHTML = '';
             document.getElementById("row_line"+new_counter).value = new_counter+line;
+        }
+
+        function calculation_total_amount_for_payment()
+        {
+            var checkboxes = document.querySelectorAll('input[name="payment_check"]:checked'), values = [];
+            Array.prototype.forEach.call(checkboxes, function(el) {
+                values.push(el.value);
+            });
+
+            var amount_array = [];
+            var receiving_array = [];
+            var total_amount = 0;
+
+            for (var i=0; i < values.length; i++)
+            {
+                var split = values[i].split("?fs?");
+
+                if ( !(receiving_array.includes(split[1]) ))
+                {
+                    amount_array.push(split[0]);
+                    receiving_array.push(split[1]);
+                    total_amount += parseInt(split[0]);
+                }
+            }
+
+            document.getElementById("amount_array").value = amount_array;
+            document.getElementById("receiving_array").value = receiving_array;
+            document.getElementById("total_amount").value = total_amount;
+            document.getElementById("total_amount_view").innerHTML = total_amount;
+            document.getElementById("payment_amount").value = total_amount;
+
+        }
+
+        function discount_calculation()
+        {
+            var discount = document.getElementById("discount_amount").value;
+            var total_amount = document.getElementById("total_amount").value;
+            var percentage = (parseInt(discount) * 100) / parseInt(total_amount);
+            document.getElementById("discount_percent").innerHTML = percentage.toFixed(2)+"%";
+            document.getElementById("payment_amount").value = total_amount - discount;
+
         }
 
     </script>

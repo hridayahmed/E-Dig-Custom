@@ -16,6 +16,7 @@ use App\Http\Controllers\NewPurchaseController;
 use App\Http\Controllers\RecevingController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\PaymentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -145,6 +146,9 @@ Route::get('/login',function (){
         Route::get('item_stock', [StockController::class,'item_stock']);
         Route::post('item_stock_against_lot', [StockController::class,'item_wise_lot']);
         Route::get('purchase_order_receive_view', [StockController::class,'purchase_order_receive']);
+
+        //payment portion
+        Route::get('make_payment', [PaymentController::class,'make_payment']);
 
 });
 

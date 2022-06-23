@@ -43,7 +43,7 @@ class StockController extends Controller
             ->where('receiving.purchase_order_id', '=', $purchase_order_id)
             ->get();
 
-        dd($item_wise_receiving_all_data);
+        //dd($item_wise_receiving_all_data);
 
         return view('layout.items.purchase_receive_view_list')->with(['item_wise_receiving'=> $item_wise_receiving_all_data]);
     }
