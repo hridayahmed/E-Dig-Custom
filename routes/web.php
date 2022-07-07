@@ -92,15 +92,15 @@ Route::get('/login',function (){
     Route::view('/direct_sale','layout/sales/direct_sale');
     Route::post('generate_direct_sell_so',[GenerateDirectSOController::class,'index']);
 
-    Route::get('item_search', [ItemSearchController::class, 'getItems']);
+    Route::get('item_search_for_sales', [ItemSearchController::class, 'getItems']);
 
     Route::get('lot_search', [ItemSearchController::class, 'getLots']);
 
-    Route::get('item_details_info', [ItemSearchController::class, 'getItemDetails']);
+    Route::get('item_details_info_for_sales', [ItemSearchController::class, 'getItemDetails']);
 
     Route::get('item_quantity', [ItemSearchController::class, 'getItemQuantity']);
 
-    Route::get('add_new_line',[AddNewLineController::class,'index']);
+    Route::get('add_new_line_for_sales',[AddNewLineController::class,'index']);
 
     Route::post('sales_order_generated',[SaveSOInDatabaseController::class,'save']);
 
@@ -149,6 +149,10 @@ Route::get('/login',function (){
 
         //payment portion
         Route::get('make_payment', [PaymentController::class,'make_payment']);
+        Route::post('details_info_for_payment', [PaymentController::class,'details_for_payment']);
+        Route::post('details_info_for_purchase_order_wise_payment', [PaymentController::class,'details_for_purchase_order_wise_payment']);
+        Route::post('adjustment_amount_form_receive', [PaymentController::class,'adjustment_amount_form']);
+        Route::post('payment_save_to_database', [PaymentController::class,'payment_to_database']);
 
 });
 

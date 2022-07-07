@@ -15,11 +15,11 @@
     <div class="form-group col-md-1">
         <input type="text" class="form-control item_category{{$serial}}" id="item_category{{$serial}}" name="item_category{{$serial}}" readonly>
     </div>
-    <div class="form-group col-md-1">
+    <div class="form-group col-md-2">
         <input type="text" class="form-control brand_name{{$serial}}" id="brand_name{{$serial}}" name="brand_name{{$serial}}" readonly>
     </div>
     <div class="form-group col-md-1">
-        <select name="lot{{$serial}}" id="lot{{$serial}}" class="lotsearch form-control"></select>
+        <select name="lot{{$serial}}" id="lot{{$serial}}" class="form-control" ></select>
     </div>
     <div class="form-group col-md-1">
         <input type="number" class="form-control quantity{{$serial}}" id="quantity{{$serial}}" name="quantity{{$serial}}" placeholder="Quantity">

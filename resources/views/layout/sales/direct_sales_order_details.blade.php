@@ -15,7 +15,7 @@
 
     <div class="row">
 
-        <div class="offset-lg-1 col-lg-10">
+        <div class="col-lg-12">
 
             <!-- Circle Buttons -->
             <div class="card shadow mb-4">
@@ -64,7 +64,7 @@
                             <div class="form-group col-md-2">
                                 <input type="text" class="form-control generic_name1" id="generic_name1" name="generic_name1" readonly>
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-1">
                                 <input type="text" class="form-control ratio1" id="ratio1" name="ratio1" readonly>
                             </div>
                             <div class="form-group col-md-1">
@@ -75,6 +75,10 @@
                             </div>
                             <div class="form-group col-md-2">
                                 <input type="text" class="form-control brand_name1" id="brand_name1" name="brand_name1" readonly>
+                            </div>
+
+                            <div class="form-group col-md-1">
+                                <select name="lot1" id="lot1" class="form-control" ></select>
                             </div>
                             <div class="form-group col-md-1">
                                 <input type="number" class="form-control quantity1" id="quantity1" name="quantity1" placeholder="Quantity">
@@ -132,7 +136,7 @@
         $('.livesearch').select2({
             placeholder: 'Select item',
             ajax: {
-                url: '/item_search',
+                url: '/item_search_for_sales',
                 dataType: 'json',
                 delay: 250,
                 processResults: function (data) {
@@ -157,25 +161,55 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: "item_details_info",
+                url: "item_details_info_for_sales",
                 type: "GET",
                 data: {
                     _token: _token, item_id:item_id, serial: serial
                 },
                 success: function(data)
                 {
-                    var ratio = data[0].ratio;
-                    var generic_name = data[0].generic_name;
-                    var per_unit_price = data[0].per_unit_price;
-                    var brand_name = data[0].brand_name;
-                    var item_category = data[0].item_category;
+                    //item info
+                    var ratio = data['item_all'][0].ratio;
+                    var generic_name = data['item_all'][0].generic_name;
+                    var per_unit_price = data['item_all'][0].per_unit_price;
+                    var brand_name =data['item_all'][0].brand_name;
+                    var item_category = data['item_all'][0].item_category;
 
-                    //alert(data => item_name);
+                    //assign item info data
                     document.getElementById("ratio"+serial).value = ratio;
                     document.getElementById("generic_name"+serial).value = generic_name;
                     document.getElementById("per_unit_price"+serial).value = per_unit_price;
                     document.getElementById("brand_name"+serial).value = brand_name;
                     document.getElementById("item_category"+serial).value = item_category;
+
+                    var row = data['total_lot'];
+                    var html_content = '';
+
+                    for(var i= 0; i < row; i++)
+                    {
+                        var lot_number = data['lot_info'][i].lot_number;
+                        var lot_id = data['lot_info'][i].lot_id;
+                        html_content += "<option value=\""+lot_id+"\">"+lot_number+"</option>";
+                    }
+
+                    document.getElementById("lot"+serial).innerHTML = html_content;
+
+                    // var item_name = data['item_all'][0].item_name;
+                    // var row = data['total_lot'];
+                    // console.log(data);
+                    // alert(item_name);
+                    // alert(row);
+
+                    // var ratio = data[0].ratio;
+                    // var generic_name = data[0].generic_name;
+                    // var per_unit_price = data[0].per_unit_price;
+                    // var brand_name = data[0].brand_name;
+                    // var lot = data[0].lot;
+                    // var item_category = data[0].item_category;
+                    //
+                    // console.log(lot);
+                    //
+                    // //alert(data => item_name);
 
                 }
             });
@@ -189,7 +223,7 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: "add_new_line",
+                url: "add_new_line_for_sales",
                 type: "GET",
                 data: {
                     _token: _token, serial: serial
@@ -204,7 +238,7 @@
                     $('.livesearch').select2({
                         placeholder: 'Select item',
                         ajax: {
-                            url: '/item_search',
+                            url: '/item_search_for_sales',
                             dataType: 'json',
                             delay: 250,
                             processResults: function (data) {

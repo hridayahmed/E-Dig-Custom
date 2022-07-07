@@ -31,6 +31,8 @@ class ItemSearchController extends Controller
                 ->get();
         }
 
+        //dd($movies);
+
         return response()->json($movies);
     }
 
@@ -78,14 +80,35 @@ class ItemSearchController extends Controller
         $item_id = $request->item_id;
         $item_all = [];
 
+//        $item_all = DB::connection('mysql2')->table('items')
+//            ->select(  'items.*', 'lot.lot_number', 'lot.lot_id', DB::raw('count(items.item_id) as total'))
+//            ->join('lot','lot.item_id','=','items.item_id')
+//            ->groupBy('items.item_id')
+//            ->where('items.item_id', '=', "$item_id")
+//            ->get();
+
         $item_all = DB::connection('mysql2')->table('items')
-            ->select(  'items.*', 'lot.lot_number', 'lot.lot_id', DB::raw('count(items.item_id) as total'))
-            ->join('lot','lot.item_id','=','items.item_id')
+            ->select(  'items.*', DB::raw('count(items.item_id) as total'))
             ->groupBy('items.item_id')
             ->where('items.item_id', '=', "$item_id")
             ->get();
 
-        return response()->json($item_all);
+
+
+        $get_lot_info = DB::connection('mysql2')->table('lot')
+            ->select(  'lot.lot_number', 'lot.lot_id')
+            ->where('lot.item_id', '=', "$item_id")
+            ->get();
+
+        $total_count = count($get_lot_info);
+
+        //dd($item_all);
+        //return response()->json($item_all);
+        return response()->json(array(
+            'item_all' => $item_all,
+            'lot_info' => $get_lot_info,
+            'total_lot' => $total_count,
+        ));
     }
 
 }
