@@ -29,7 +29,7 @@
                                     <div class="form-group">
                                         <label>Supplier <span class="text-danger">*</span></label>
                                         <span>{{$purchase_order_data[0]->supplier_name}}</span>
-                                        <input class="form-control" type="hidden" name="supplier_id" id="supplier_id" value="{{$purchase_order_data[0]->supplier_name}}" >
+                                        <input class="form-control" type="hidden" name="supplier_id" id="supplier_id" value="{{$purchase_order_data[0]->supplier_id}}" >
                                     </div>
                                 </div>
                                 <div class="col-lg-4">

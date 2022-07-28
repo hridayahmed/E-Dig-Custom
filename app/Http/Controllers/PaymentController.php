@@ -23,7 +23,9 @@ class PaymentController extends Controller
         $item_wise_receiving_all_data = DB::connection('mysql2')->table('receiving')
             ->select('receiving.*','items.*')
             ->leftJoin('items', 'items.item_id' ,'=','receiving.item_id')
+            ->leftJoin('payment_set', 'receiving.supplier_id' ,'=','payment_set.supplier_id')
             ->where('receiving.supplier_id', '=', $supplier_id)
+            ->groupBy('receiving.receiving_id')
             ->get();
 
         $item_wise_receiving_for_po = DB::connection('mysql2')->table('receiving')

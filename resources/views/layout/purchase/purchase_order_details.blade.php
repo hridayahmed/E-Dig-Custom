@@ -55,7 +55,7 @@
                             <?php
                                 $counter = 1;
                             ?>
-                            @foreach ($purchase_order_data as $data)
+                            @foreach ($purchase_order_details_data as $data)
                                 <div class="service-fields mb-3 border">
                                     <div class="container-fluid mt-3">
                                         <h6>Line {{$counter}}</h6>

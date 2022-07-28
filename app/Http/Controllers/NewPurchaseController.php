@@ -171,18 +171,32 @@ class NewPurchaseController extends Controller
     public function get_details_info(Request $request)
     {
         $purchase_order_id = $request->purchase_order_id;
-
-        $purchase_order_all_data = DB::connection('mysql2')->table('purchase_order')
-            ->select('purchase_order.*','supplier.supplier_name', 'supplier.supplier_id', 'purchase_order_details.*', 'brands_url.*')
-            ->join('supplier', 'supplier.supplier_id' ,'=','purchase_order.supplier_id')
-            ->join('purchase_order_details', 'purchase_order.purchase_order_id' ,'=','purchase_order_details.purchase_order_id')
-            ->join('brands_url', 'purchase_order_details.item_id' ,'=','brands_url.id')
-            ->where('purchase_order_details.purchase_order_id' , '=', $purchase_order_id)
-            ->get();
+        //dd($purchase_order_id);
+//        $purchase_order_all_data = DB::connection('mysql2')->table('purchase_order')
+//            ->select('purchase_order.*','supplier.supplier_name', 'supplier.supplier_id', 'purchase_order_details.*', 'brands_url.*')
+//            ->join('supplier', 'supplier.supplier_id' ,'=','purchase_order.supplier_id')
+//            ->join('purchase_order_details', 'purchase_order.purchase_order_id' ,'=','purchase_order_details.purchase_order_id')
+//            ->join('brands_url', 'purchase_order_details.item_id' ,'=','brands_url.id')
+//            ->where('purchase_order_details.purchase_order_id' , '=', $purchase_order_id)
+//            ->get();
 
         //dd($purchase_order_all_data);
 
-        return view('layout.purchase.purchase_order_details')->with(['purchase_order_data'=> $purchase_order_all_data]);
+
+        $purchase_order_after_insert_data = DB::connection('mysql2')->table('purchase_order')
+            ->select('purchase_order.*', 'supplier.supplier_name')
+            ->join('supplier', 'supplier.supplier_id', '=', 'purchase_order.supplier_id')
+            ->where('purchase_order.purchase_order_id', '=', $purchase_order_id)
+            ->get();
+
+        $purchase_order_details_after_insert_data = DB::connection('mysql2')->table('purchase_order_details')
+            ->select('purchase_order_details.*', 'brands_url.*')
+            ->join('brands_url', 'brands_url.id', '=', 'purchase_order_details.item_id')
+            ->where('purchase_order_details.purchase_order_id', '=', $purchase_order_id)
+            ->get();
+
+        return view('layout.purchase.purchase_order_details')->with(['purchase_order_data'=> $purchase_order_after_insert_data,
+            'purchase_order_details_data'=> $purchase_order_details_after_insert_data]);
     }
 
     public function delete_purchase_order(Request $request)

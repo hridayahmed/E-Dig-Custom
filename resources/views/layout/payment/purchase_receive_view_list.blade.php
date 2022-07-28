@@ -31,8 +31,10 @@
                                 <th>Rcv Qty.</th>
                                 <th>PUP(B)</th>
                                 <th>Price</th>
+                                <th>Rem Amount</th>
                                 <th>Status</th>
                                 <th>Add to Pay</th>
+                                <th>Pay Amount</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -50,10 +52,15 @@
                                     <td>{{$data->quantity}}</td>
                                     <td>{{$data->per_unit_price}}</td>
                                     <td>{{ ($data->per_unit_price * $data->quantity) }}</td>
+                                    <td>0</td>
                                     <td>{{$data->status}}</td>
                                     <td>
                                         <label><input type="checkbox" name="payment_check[]" id="payment_check{{$counter}}" value="{{($data->per_unit_price * $data->quantity)}}?fs?{{$data->receiving_id}}"
                                                       onclick="calculation_total_amount_for_payment();"> </label>
+                                    </td>
+
+                                    <td>
+                                        <label><input type="number" name="pay{{$counter}}" id="pay{{$counter}}" value=""> </label>
                                     </td>
 
                                     <input type="hidden" id="purchase_order_id{{$counter}}" name="purchase_order_id{{$counter}}" value="{{$data->purchase_order_id}}">
