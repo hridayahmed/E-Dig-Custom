@@ -1,11 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-<<<<<<< HEAD
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 
-=======
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -22,7 +18,6 @@ use App\Http\Controllers\RecevingController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\PaymentController;
->>>>>>> 35313778b16ab4743535990deee621f8613de4dc
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,7 +42,6 @@ Route::get('/login',function (){
     {
         return view('login');
     }
-<<<<<<< HEAD
 
 
 });
@@ -65,9 +59,6 @@ Route::get('/supplier_list',function (){
     }
 
 });
-=======
-});
-
 
 //for dynamic connection
 
@@ -183,4 +174,3 @@ Route::get('/supplier_list',function (){
 
 
 
->>>>>>> 35313778b16ab4743535990deee621f8613de4dc
