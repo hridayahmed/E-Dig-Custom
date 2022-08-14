@@ -17,6 +17,10 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('phone_number');
             $table->string('trade_name');
+<<<<<<< HEAD
+=======
+            $table->string('name');
+>>>>>>> 35313778b16ab4743535990deee621f8613de4dc
             $table->string('owner_name');
             $table->string('trade_license_number');
             $table->string('drug_license_number');

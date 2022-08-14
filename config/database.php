@@ -33,6 +33,12 @@ return [
     |
     */
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 35313778b16ab4743535990deee621f8613de4dc
     'connections' => [
 
         'sqlite' => [
@@ -63,6 +69,29 @@ return [
             ]) : [],
         ],
 
+<<<<<<< HEAD
+=======
+        'mysql2' => [
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'forge'),
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => false,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
+>>>>>>> 35313778b16ab4743535990deee621f8613de4dc
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),

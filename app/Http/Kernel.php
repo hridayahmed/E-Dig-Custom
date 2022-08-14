@@ -45,6 +45,12 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+<<<<<<< HEAD
+=======
+        'protect' => [
+            \App\Http\Middleware\SetDBMiddleWare::class,
+        ],
+>>>>>>> 35313778b16ab4743535990deee621f8613de4dc
     ];
 
     /**

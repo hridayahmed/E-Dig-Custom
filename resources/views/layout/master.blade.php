@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+<<<<<<< HEAD
+=======
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+>>>>>>> 35313778b16ab4743535990deee621f8613de4dc
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">

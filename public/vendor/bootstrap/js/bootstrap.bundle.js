@@ -1539,7 +1539,11 @@
    * Permission is hereby granted, free of charge, to any person obtaining a copy
    * of this software and associated documentation files (the "Software"), to deal
    * in the Software without restriction, including without limitation the rights
+<<<<<<< HEAD
    * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+=======
+   * to use, copy, modify, merge, publish, distribute, sublicense, and/or sales
+>>>>>>> 35313778b16ab4743535990deee621f8613de4dc
    * copies of the Software, and to permit persons to whom the Software is
    * furnished to do so, subject to the following conditions:
    *
