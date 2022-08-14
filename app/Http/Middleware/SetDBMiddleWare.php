@@ -26,7 +26,7 @@ class SetDBMiddleWare
    // $dbName="test";
     if (Auth::check())
     {
-        $dbName="ediagnosis".Auth::id();
+        $dbName="ediag".Auth::id();
         Config::set('database.connections.mysql2.database', $dbName);//new database name, you want to connect to.
         return $next($request);
 

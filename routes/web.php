@@ -34,7 +34,6 @@ Route::middleware(['protect'])->group(function () {
     Route::get('/supplier_name',[PurchaseController::class,'supplier_name']);
     Route::get('/add_item',[PurchaseController::class,'add_item']);
 
-
 });
 
 
@@ -43,6 +42,7 @@ Route::get('/', function () {
 })->middleware('throttle:5,1');
 
 Route::post('/login',[AuthController::class,'login'])->middleware('throttle:5,10');
+
 Route::get('/login',function (){
     if (Auth::check()) {
         return view('layout/supplier/add_supplier');
